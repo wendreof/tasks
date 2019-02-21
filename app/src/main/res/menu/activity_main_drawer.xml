@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_tasks"
+            android:icon="@drawable/ic_all"
+            android:title="Todas" />
+        <item
+            android:id="@+id/nav_next_seven_days"
+            android:icon="@drawable/ic_seven_days"
+            android:title="Próximos 7 dias" />
+        <item
+            android:id="@+id/nav_overdue"
+            android:icon="@drawable/ic_overdue"
+            android:title="Expiradas" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Sair" />
+    </group>
+
+</menu>
