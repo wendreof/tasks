@@ -1,4 +1,4 @@
-package com.devmasterteam.tasks.repository;
+package com.devmasterteam.tasks.repository.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,4 +1,4 @@
-package com.devmasterteam.tasks.repository;
+package com.devmasterteam.tasks.repository.api;
 
 import com.devmasterteam.tasks.constants.TaskConstants;
 import com.devmasterteam.tasks.entities.APIResponse;
@@ -42,6 +42,7 @@ public class ExternalRepository {
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry) it.next();
                     conn.setRequestProperty(pair.getKey().toString(), pair.getValue().toString());
+                    it.remove();
                 }
             }
 
@@ -55,6 +56,8 @@ public class ExternalRepository {
             }
 
             inputStream.close();
+            conn.disconnect();
+
         } catch (Exception e) {
             response = new APIResponse("", TaskConstants.STATUS_CODE.NOT_FOUND);
         }
@@ -62,7 +65,7 @@ public class ExternalRepository {
     }
 
     private String getStringFromInputStream(InputStream inputStream) {
-        if(inputStream == null){
+        if (inputStream == null) {
             return "";
         }
 
@@ -70,13 +73,14 @@ public class ExternalRepository {
         StringBuilder builder = new StringBuilder();
 
         String line;
-        try{
+        try {
             br = new BufferedReader(new InputStreamReader(inputStream));
-            while((line = br.readLine()) != null)
-                builder.append(line)    ;
+            while ((line = br.readLine()) != null)
+                builder.append(line);
 
             br.close();
-        } catch (Exception e){
+
+        } catch (Exception e) {
             return "";
         }
 
@@ -104,5 +108,7 @@ public class ExternalRepository {
             builder.append("=");
             builder.append(URLEncoder.encode(e.getValue(), "UTF-8"));
         }
+        return builder.toString();
     }
+
 }
