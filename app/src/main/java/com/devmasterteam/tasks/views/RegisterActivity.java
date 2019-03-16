@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.devmasterteam.tasks.R;
-import com.devmasterteam.tasks.infra.OperationListener;
+import com.devmasterteam.tasks.infra.operation.OperationListener;
 import com.devmasterteam.tasks.manager.PersonManager;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -50,9 +50,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private OperationListener registerListener() {
-        return new OperationListener() {
+        return new OperationListener<Boolean>() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(Boolean result) {
 
             }
 
