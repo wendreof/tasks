@@ -1,8 +1,12 @@
 package com.devmasterteam.tasks.repository.api;
 
+import android.content.Context;
+
 import com.devmasterteam.tasks.constants.TaskConstants;
 import com.devmasterteam.tasks.entities.APIResponse;
 import com.devmasterteam.tasks.entities.FullParameters;
+import com.devmasterteam.tasks.infra.InternetNotAvailableException;
+import com.devmasterteam.tasks.utils.NetworkUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -17,7 +21,18 @@ import java.util.Map;
 
 public class ExternalRepository {
 
-    public APIResponse execute(FullParameters parameters) {
+    private Context mContext;
+
+    public ExternalRepository (Context context){
+        this.mContext = context;
+    }
+
+    public APIResponse execute(FullParameters parameters) throws InternetNotAvailableException {
+
+        if(!NetworkUtils.isConnectionAvailable(this.mContext)){
+            throw new InternetNotAvailableException();
+        }
+
         APIResponse response;
         InputStream inputStream;
         HttpURLConnection conn;
