@@ -46,6 +46,16 @@ public class ExternalRepository {
                 }
             }
 
+            if (!parameters.method.equals(TaskConstants.OPERATION_METHOD.GET)){
+                String query = getQuery(parameters.parameters, parameters.method);
+                byte[] postDataBytes = query.getBytes("UTF-8");
+                int postDataBytesLenght = postDataBytes.length;
+
+                conn.setRequestProperty("Content-Lenght", Integer.toString(postDataBytesLenght));
+                conn.setDoOutput(true);
+                conn.getOutputStream().write(postDataBytes);
+            }
+
             conn.connect();
             if (conn.getResponseCode() == TaskConstants.STATUS_CODE.SUCCESS) {
                 inputStream = conn.getInputStream();
